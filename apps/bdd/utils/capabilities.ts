@@ -2,7 +2,12 @@ export const CAPABILITY_WEB_CHROME = [
   {
     browserName: "chrome",
     "goog:chromeOptions": {
-      args: ["--headless", "--disable-gpu", "--window-size=1920,1080"],
+      args: [
+        "--disable-gpu",
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--start-maximized",
+      ],
     },
   },
 ];
@@ -13,7 +18,9 @@ export const CAPABILITY_WEB_CHROME_FOR_DEBUG = [
     "goog:chromeOptions": {
       args: [
         "--disable-gpu",
-        "--window-size=1920,1080",
+        "--start-maximized",
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
         "--auto-open-devtools-for-tabs",
       ],
     },

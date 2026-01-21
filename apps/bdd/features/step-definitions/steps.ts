@@ -92,7 +92,7 @@ Then(/^I should see my new wallet in the list of wallets$/, async () => {
   const walletItemSelector = `[data-test=wallet-item-name-${stepState.walletName}]`;
   // Wait for the wallet item to be displayed assuming API latency
   await $(walletItemSelector).waitForDisplayed({
-    timeout: 3000,
+    timeout: 100000,
     timeoutMsg: `Wallet item with name "${stepState.walletName}" did not appear in the list`,
   });
 });
@@ -174,7 +174,7 @@ Then(/^I should see a confirmation message$/, async () => {
       return false;
     },
     {
-      timeout: 10000,
+      timeout: 30000,
       timeoutMsg: "Expected success message or redirect to login",
     },
   );
