@@ -6,15 +6,33 @@ import Video from "wdio-video-reporter";
 import cucumberJson from "wdio-cucumberjs-json-reporter";
 import {
   REPORTS_ROOT,
+  PLATFORM_REPORTS_ROOT,
   VIDEOS_TMP,
   findVideoForCid,
   scenarioDirs,
   FEATURE_BUCKET_BY_CID,
 } from "./utils/artifacts";
 
-// Define a base config type that matches your specific service configurations
 interface CustomTestrunner extends Omit<Options.Testrunner, "services"> {
   services?: (string | object)[];
+}
+function getEnvMetadata(caps: any) {
+  if (caps.browserName) {
+    return {
+      Platform: caps.platformName || process.platform,
+      Browser: caps.browserName,
+      "Browser Version": caps.browserVersion || caps.version || "unknown",
+    };
+  } else {
+    return {
+      Platform: caps.platformName || "Android",
+      Device: caps["appium:deviceName"] ?? caps.deviceName ?? "Unknown device",
+      "OS Version":
+        caps["appium:platformVersion"] ?? caps.platformVersion ?? "Unknown",
+      Automation:
+        caps["appium:automationName"] ?? caps.automationName ?? "Appium",
+    };
+  }
 }
 
 export const baseConfig: CustomTestrunner = {
@@ -67,7 +85,11 @@ export const baseConfig: CustomTestrunner = {
     [
       "cucumberjs-json",
       {
-        jsonFolder: path.join(REPORTS_ROOT, "cucumber"),
+        jsonFolder: path.join(PLATFORM_REPORTS_ROOT, "cucumber"),
+        metadata: {
+          Framework: "WebdriverIO",
+          Type: "BDD",
+        },
       },
     ],
   ],
@@ -93,8 +115,8 @@ export const baseConfig: CustomTestrunner = {
   // Hooks (Common) - Cast to appropriate types
   // =====
   onPrepare: function (_config: any, _capabilities: any) {
-    const cucumberJsonDir = path.join(REPORTS_ROOT, "cucumber");
-    const cucumberHtmlDir = path.join(REPORTS_ROOT, "cucumber-html");
+    const cucumberJsonDir = path.join(PLATFORM_REPORTS_ROOT, "cucumber");
+    const cucumberHtmlDir = path.join(PLATFORM_REPORTS_ROOT, "cucumber-html");
     const videosDir = path.dirname(VIDEOS_TMP);
     const framesRootDir = path.join(VIDEOS_TMP, ".video-reporter-screenshots");
 
@@ -116,6 +138,20 @@ export const baseConfig: CustomTestrunner = {
 
     fs.mkdirSync(VIDEOS_TMP, { recursive: true });
     fs.mkdirSync(framesRootDir, { recursive: true });
+  },
+
+  beforeSession: function (_config: any, caps: any) {
+    const meta = getEnvMetadata(caps);
+    const cid = process.env.WDIO_WORKER_ID || "global";
+
+    Object.entries(meta).forEach(([key, value]) => {
+      try {
+        (cucumberJson as any).addMetadata(
+          cid === "global" ? key : `${key} (${cid})`,
+          value,
+        );
+      } catch {}
+    });
   },
 
   beforeFeature: function (uri: string) {

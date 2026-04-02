@@ -2,16 +2,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { baseConfig } from "./wdio.base.conf";
 import { CAPABILITY_WEB_CHROME_FOR_DEBUG } from "./utils/capabilities";
-
-// Video reporter for recording test execution - useful for debugging and demos
-import Video from "wdio-video-reporter";
-import {
-  REPORTS_ROOT,
-  VIDEOS_TMP,
-  scenarioDirs,
-  findVideoForCid,
-} from "./utils/artifacts";
-import cucumberJson from "wdio-cucumberjs-json-reporter";
+import { REPORTS_ROOT, VIDEOS_TMP } from "./utils/artifacts";
 
 export const config: WebdriverIO.Config = {
   ...baseConfig,
@@ -25,7 +16,7 @@ export const config: WebdriverIO.Config = {
   capabilities: CAPABILITY_WEB_CHROME_FOR_DEBUG,
 
   // Debug services
-  services: ["chromedriver"] as any,
+  services: [] as any,
 
   // ==================
   // Specify Test Files

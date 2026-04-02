@@ -8,13 +8,12 @@ export const config: Options.Testrunner = {
   // Web-specific capabilities
   capabilities: CAPABILITY_WEB_CHROME,
 
-  // Web-specific services - properly typed
-  services: ["chromedriver"] as any,
+  services: [],
 
   // Web-specific cucumber tags
   cucumberOpts: {
     ...baseConfig.cucumberOpts,
-    tags: "@web",
+    tags: "@web and not @skip",
   },
 
   // Web-specific hooks

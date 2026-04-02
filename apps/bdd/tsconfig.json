@@ -2,8 +2,8 @@
   "compilerOptions": {
     "types": ["node", "@wdio/globals/types"],
     "target": "ES2022",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "rootDir": ".",
