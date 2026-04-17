@@ -1,6 +1,6 @@
 import type { Options } from "@wdio/types";
-import { baseConfig } from "./wdio.base.conf";
-import { CAPABILITY_ANDROID, CAPABILITY_IOS } from "./utils/capabilities";
+import { baseConfig } from "./wdio.base.conf.ts";
+import { CAPABILITY_ANDROID, CAPABILITY_IOS } from "./utils/capabilities.ts";
 
 const PLATFORM = process.env.PLATFORM || "android";
 
