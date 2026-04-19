@@ -34,6 +34,3 @@ web-build/
 # Yarn 4+ internal files
 .yarn/install-state.gz
 .swp
-
-
-.cache
