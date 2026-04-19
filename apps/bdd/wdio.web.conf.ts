@@ -6,8 +6,16 @@ export const config: Options.Testrunner = {
   ...baseConfig,
 
   capabilities: CAPABILITY_WEB_CHROME,
+  cacheDir: "../../.yarn/.cache/webdriver",
 
-  services: [],
+  services: [
+    [
+      "chromedriver",
+      {
+        version: "147",
+      },
+    ],
+  ],
 
   cucumberOpts: {
     ...baseConfig.cucumberOpts,
