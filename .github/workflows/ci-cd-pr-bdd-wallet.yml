@@ -42,6 +42,17 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
+      - name: Cache Yarn and WebDriver
+        uses: actions/cache@v4
+        with:
+          path: |
+            .yarn/cache
+            .yarn/unplugged
+            .yarn/.cache/webdriver
+          key: yarn-webdriver-${{ runner.os }}-${{ hashFiles('yarn.lock', 'apps/bdd/wdio.web.conf.ts') }}
+          restore-keys: |
+            yarn-webdriver-${{ runner.os }}-
+
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
