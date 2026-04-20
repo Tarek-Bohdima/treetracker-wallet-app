@@ -10,10 +10,16 @@ on:
       - synchronize
       - reopened
       - edited
-    paths-ignore:
-      - "**/*.md"
-      - "**/*.yml"
-      - "**/*.yaml"
+      - ready_for_review
+    paths:
+      - "apps/bdd/**"
+      - "apps/web/**"
+      - "apps/user/**"
+      - "packages/core/**"
+      - "packages/wallet/**"
+      - "package.json"
+      - "yarn.lock"
+      - ".github/workflows/ci-cd-pr-bdd-wallet.yml"
   push:
     branches:
       - main
