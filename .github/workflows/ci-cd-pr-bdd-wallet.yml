@@ -100,7 +100,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: apps/bdd/test-artifacts/reports/web/cucumber-html
-          destination_dir: webdriver/pr-${{ github.event.pull_request.number }}
+          destination_dir: webdriver/web/pr-${{ github.event.pull_request.number }}
           keep_files: true
 
       - name: Deploy production WebDriver report to GitHub Pages
@@ -110,7 +110,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: apps/bdd/test-artifacts/reports/web/cucumber-html
-          destination_dir: webdriver/prod
+          destination_dir: webdriver/web/prod
           keep_files: true
 
       - name: Pin report links on PR
@@ -123,7 +123,7 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const prNumber = context.payload.pull_request.number;
-            const base = `https://${owner}.github.io/${repo}/webdriver`;
+            const base = `https://${owner}.github.io/${repo}/webdriver/web`;
             const prUrl = `${base}/pr-${prNumber}/index.html`;
             const prodUrl = `${base}/prod/index.html`;
             const marker = "<!-- webdriver-report-links -->";
