@@ -7,6 +7,8 @@ export const CAPABILITY_WEB_CHROME = [
         "--no-sandbox",
         "--disable-dev-shm-usage",
         "--start-maximized",
+        "--headless=new",
+        "--window-size=1920,1080",
       ],
     },
   },
