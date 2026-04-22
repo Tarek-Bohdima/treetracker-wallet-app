@@ -23,7 +23,7 @@ export const config: Options.Testrunner = {
         command: "appium",
         args: {
           port: 4723,
-          address: "localhost",
+          address: "127.0.0.1",
         },
         logPath: "./logs",
       },

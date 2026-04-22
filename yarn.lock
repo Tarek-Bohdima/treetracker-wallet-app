@@ -6169,6 +6169,7 @@ __metadata:
     "@testing-library/webdriverio": "npm:^3.2.1"
     "@types/jasmine": "npm:^5.1.8"
     "@types/node": "npm:^24.5.0"
+    "@wdio/appium-service": "npm:^9.20.0"
     "@wdio/cli": "npm:^9.18.4"
     "@wdio/cucumber-framework": "npm:^9.18.0"
     "@wdio/globals": "npm:^9.17.0"
