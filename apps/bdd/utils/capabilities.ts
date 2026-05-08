@@ -33,6 +33,7 @@ export const CAPABILITY_ANDROID = [
   {
     platformName: "Android",
     "appium:deviceName": "Pixel_9a",
+    "appium:isHeadless": true,
     "appium:app": `${process.env.PROJECT_ROOT_ANDROID}/android/app/build/outputs/apk/debug/app-debug.apk`,
     "appium:automationName": "UiAutomator2",
     "appium:appPackage": "com.gtw.app",
